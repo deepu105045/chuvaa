@@ -11,6 +11,10 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'cash-flow',
+    loadChildren: () => import('./cash-flow/cash-flow.module').then( m => m.CashFlowPageModule)
+  },
 ];
 
 @NgModule({

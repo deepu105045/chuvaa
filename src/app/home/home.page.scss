@@ -1,27 +1,26 @@
-#container {
-  text-align: center;
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+.summary{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: center;
+  height:15rem;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+ion-row{
+  margin: 1rem;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+.expense{
+  height: 6rem;
 }
 
-#container a {
-  text-decoration: none;
+.card1{
+  width: 20rem;
+  height: 12rem;
+  border-radius: 1.5rem;
+  background: beige;
 }
+
+

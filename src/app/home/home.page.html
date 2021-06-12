@@ -1,20 +1,101 @@
-<ion-header [translucent]="true">
+<ion-header color="primary">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title text-left>My Home</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content >
+  <ion-grid>
+    <div class="summary">
+      <ion-item>
+        <ion-card class="card1">
+          <ion-card-header>
+            <ion-label> </ion-label>
+          </ion-card-header>
+          <ion-card-title>
+            <ion-label>Coming soon...</ion-label>
+          </ion-card-title>
+          <ion-card-content>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+    </div>
+  </ion-grid>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-grid>
+    <ion-row justify-content-around>
+      <ion-col>
+        <ion-button expand="block" fill="clear" class="expense" routeDirection="forward" [routerLink]="['/dummy']"
+          (click)="goToExpense()">
+          <div>
+            <ion-icon name="rocket-sharp"></ion-icon>
+            <ion-label>
+              <p> Daily Expense </p>
+            </ion-label>
+          </div>
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="block" fill="clear" class="expense">
+          <div>
+            <ion-icon name="fast-food"></ion-icon>
+            <ion-label>
+              <p> My Kitchen </p>
+            </ion-label>
+          </div>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row justify-content-around>
+      <ion-col>
+        <ion-button expand="block" fill="clear">
+          <div>
+            <ion-icon name="time-sharp"></ion-icon>
+            <ion-label>
+              <p> Reminders </p>
+            </ion-label>
+          </div>
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="block" fill="clear">
+          <div>
+            <ion-icon name="eye-sharp"></ion-icon>
+            <ion-label>
+              <p> Warrenty </p>
+            </ion-label>
+          </div>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row justify-content-around>
+      <ion-col>
+        <ion-button expand="block" fill="clear">
+          <div>
+            <ion-icon name="trending-up-sharp"></ion-icon>
+            <ion-label>
+              <p> Diary </p>
+            </ion-label>
+          </div>
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="block" fill="clear">
+          <div>
+            <ion-icon name="logo-bitcoin"></ion-icon>
+            <ion-label>
+              <p> Investments </p>
+            </ion-label>
+          </div>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 </ion-content>
+

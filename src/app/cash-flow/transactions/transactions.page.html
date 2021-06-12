@@ -1,0 +1,14 @@
+
+<ion-list  *ngFor = "let transaction of transactionList">
+  <ion-item [style.color]="transaction.type =='expense' ? 'red' : 'green'">
+    <ion-label > {{transaction.category}}
+      <br><small>
+        {{transaction.transactionDate |date: 'dd/MM/yyyy'}}
+      </small>
+    </ion-label>
+    <ion-label slot ="end">{{transaction.amount}}</ion-label>
+  </ion-item>
+</ion-list>
+
+
+
