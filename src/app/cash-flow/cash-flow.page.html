@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="home"></ion-back-button>
     </ion-buttons>
-    <ion-title>Cash Flow - {{monthYear}}</ion-title>
+    <ion-title>Cash Flow</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -17,6 +17,9 @@
     </ion-segment-button>
     <ion-segment-button value="transactions">
       <ion-label>Transactions</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="dashboard">
+      <ion-label>Dashboard</ion-label>
     </ion-segment-button>
   </ion-segment>
 
@@ -59,6 +62,10 @@
     </form>
   </div>
 
-  <div *ngIf="!showForm">
+  <div *ngIf="!showForm && active =='transactions'">
     <app-transactions></app-transactions>
+  </div>
+
+  <div *ngIf="!showForm && active =='dashboard'">
+    <app-dashboard></app-dashboard>
   </div>

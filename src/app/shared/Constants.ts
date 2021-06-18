@@ -5,5 +5,6 @@ export const constants = {
   amount:'amount',
   type: 'type',
   transactionDate: 'transactionDate',
-  category:'category'
+  category:'category',
+  dashboard:'dashboard'
 };

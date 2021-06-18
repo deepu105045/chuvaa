@@ -1,14 +1,27 @@
 
-<ion-list  *ngFor = "let transaction of transactionList">
-  <ion-item [style.color]="transaction.type =='expense' ? 'red' : 'green'">
-    <ion-label > {{transaction.category}}
+<ion-card>
+  <ion-item class="ion-activated">
+    <ion-select slot="start" [(ngModel)]="currentMonth" okText="Okay" cancelText="Dismiss">
+      <ion-select-option *ngFor='let month of allMonths'>{{month}}</ion-select-option>
+    </ion-select>
+    <ion-select slot="start" [(ngModel)]="currentYear" okText="Okay" cancelText="Dismiss">
+      <ion-select-option *ngFor='let year of allYears'>{{year}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+</ion-card>
+
+<ion-card>
+  <ion-item *ngFor="let transaction of transactionList let i = index"
+            [style.color]="transaction.type =='expense' ? 'red' : 'green'"
+            >
+    <ion-icon name="happy-outline" slot="start" *ngIf="transaction.type =='income'"></ion-icon>
+    <ion-icon name="sad-outline" slot="start" *ngIf="transaction.type =='expense'"></ion-icon>
+    <ion-label> {{transaction.category}}
       <br><small>
         {{transaction.transactionDate |date: 'dd/MM/yyyy'}}
       </small>
     </ion-label>
-    <ion-label slot ="end">{{transaction.amount}}</ion-label>
+    <ion-label slot="end">{{transaction.amount}}</ion-label>
   </ion-item>
-</ion-list>
-
-
+</ion-card>
 

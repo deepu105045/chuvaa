@@ -3,9 +3,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
 import { SegmentChangeEventDetail} from '@ionic/core';
 import { constants } from '../shared/Constants';
-import { DateService } from '../shared/date.service';
+import { DateService } from '../shared/service/date.service';
 import { Transaction } from '../shared/Transaction';
 import { CashflowService } from './cashflow.service';
+import { AuthenticationService } from '../shared/service/authentication.service';
 
 @Component({
   selector: 'app-cash-flow',
@@ -21,10 +22,12 @@ export class CashFlowPage implements OnInit {
   monthYear: string;
 
   form: FormGroup;
-  constructor(private cashflow: CashflowService,
+  constructor(private cashflowService: CashflowService,
               public toastController: ToastController,
-              private dateService: DateService) {
-    this.active = constants.expense;
+              private dateService: DateService,
+              private authService: AuthenticationService) {
+
+    this.active = constants.transactions;
     this.setFormStatus();
 
   }
@@ -59,15 +62,16 @@ export class CashFlowPage implements OnInit {
   }
 
   onSave(){
-    const transactionDate = this.form.get('transactionDate').value;
-    const category =  this.form.get('category').value;
-    const amount = this.form.get('amount').value;
-    const userId = 'Deepu';
+    const user = this.authService.userInfo;
+    const transactionDate = this.form.get(constants.transactionDate).value;
+    const category =  this.form.get(constants.category).value;
+    const amount = this.form.get(constants.amount).value;
+    const userId = user.uid;
     const type = this.active;
-    const transaction: Transaction = {transactionDate,category,amount, userId, type };
-    console.log(transaction);
+    const createdAt = this.cashflowService.getFirebaseTimeStamp();
+    const transaction: Transaction = {transactionDate,category,amount, userId, type ,createdAt};
 
-    this.cashflow.addExpense(transaction).then(res =>{
+    this.cashflowService.addExpense(transaction).then(res =>{
       this.form.reset({transactionDate});
       this.message = 'Saved successfully.';
       this.color = 'success';
@@ -88,12 +92,10 @@ export class CashFlowPage implements OnInit {
   onFilterUpdate(event: CustomEvent<SegmentChangeEventDetail>){
     this.active = event.detail.value;
     this.setFormStatus();
-    console.log(this.active);
-    console.log(this.showForm);
   }
 
   setFormStatus(){
-    if( this.active === constants.transactions){
+    if( this.active === constants.transactions || this.active === constants.dashboard){
       this.showForm = false;
     }else{
       this.showForm = true;

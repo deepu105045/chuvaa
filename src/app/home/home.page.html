@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title text-left>My Home</ion-title>
     <ion-buttons slot="end">
-      <ion-button>
+      <ion-button (click)="authService.signOut()">
         <ion-icon name="log-out-outline"></ion-icon>
       </ion-button>
     </ion-buttons>

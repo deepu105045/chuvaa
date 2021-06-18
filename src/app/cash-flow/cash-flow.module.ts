@@ -8,6 +8,7 @@ import { CashFlowPageRoutingModule } from './cash-flow-routing.module';
 
 import { CashFlowPage } from './cash-flow.page';
 import { TransactionsPageModule } from './transactions/transactions.module';
+import { DashboardPageModule } from './dashboard/dashboard.module';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { TransactionsPageModule } from './transactions/transactions.module';
     ReactiveFormsModule,
     IonicModule,
     CashFlowPageRoutingModule,
-    TransactionsPageModule
+    TransactionsPageModule,
+    DashboardPageModule
   ],
   declarations: [CashFlowPage]
 })

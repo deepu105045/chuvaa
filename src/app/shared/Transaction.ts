@@ -2,9 +2,9 @@
 export interface Transaction{
   id?: string;
   userId?: string;
-  transactionDate: string;
+  transactionDate: Date;
   category: string;
   amount: string;
   type: string;
-
+  createdAt: object;
 }
