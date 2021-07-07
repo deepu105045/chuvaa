@@ -6,11 +6,15 @@ import { HomePage } from './home.page';
 const routes: Routes = [
   {
     path: 'cash-flow',
-    component: CashFlowPage,
+    loadChildren: () => import('../../shared/cash-flow/cash-flow.module').then( m => m.CashFlowPageModule)
   },
   {
     path: '',
     component: HomePage,
+  },
+  {
+    path: 'money-manager',
+    loadChildren: () => import('./money-manager/money-manager.module').then( m => m.MoneyManagerPageModule)
   },
 
 ];

@@ -95,11 +95,14 @@ export class CashFlowPage implements OnInit {
   }
 
   setFormStatus(){
+
     if( this.active === constants.transactions || this.active === constants.dashboard){
       this.showForm = false;
     }else{
       this.showForm = true;
     }
+    console.log(this.active);
+    console.log(this.showForm);
   }
 
 

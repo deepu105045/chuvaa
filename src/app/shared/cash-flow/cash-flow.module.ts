@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule , ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
@@ -20,8 +19,8 @@ import { DashboardPageModule } from './dashboard/dashboard.module';
     IonicModule,
     CashFlowPageRoutingModule,
     TransactionsPageModule,
-    DashboardPageModule,
-    BrowserModule
+    DashboardPageModule
+
   ],
   declarations: [CashFlowPage]
 })

@@ -23,12 +23,7 @@
     </ion-segment-button>
   </ion-segment>
 
-
-  <div *ngIf="active == dashboard">
-    {{active}}
-  </div>
-<!--
-  <div *ngIf="!showForm">
+<div *ngIf="showForm">
     <form [formGroup]='form'>
       <ion-grid>
         <ion-row>
@@ -73,5 +68,5 @@
 
   <div *ngIf="!showForm && active =='dashboard'">
     <app-dashboard></app-dashboard>
-  </div> -->
+  </div>
 </ion-content>
