@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
 import { AuthenticationService } from 'src/app/shared/service/authentication.service';
 
 @Component({
@@ -15,38 +15,42 @@ export class LoginPage implements OnInit {
   constructor(
     public authService: AuthenticationService,
     public router: Router,
-    public toastController: ToastController
+    public toastController: ToastController,
+    public loadingController: LoadingController
   ) {}
 
 
   ngOnInit() {
     this.form = new FormGroup({
-      email : new FormControl('deepu105045@gmail.com',{
+      email : new FormControl('unittest@gmail.com',{
         updateOn: 'blur',
         validators: [Validators.required]
       }),
-      password : new FormControl('Enter Password',{
+      password : new FormControl('test1234',{
         updateOn: 'blur',
         validators: [Validators.required , Validators.maxLength(180)]
       })
     });
-
-
   }
 
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Please wait...',
+      duration: 2000
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
+  }
   logIn(){
+    this.presentLoading();
     const email = this.form.get('email').value;
     const password = this.form.get('password').value;
-
     this.authService.signIn(email,password)
     .then(res =>{
-      this.router.navigate(['home']);
-      // if(this.authService.isEmailVerified){
-      //   this.router.navigate(['home']);
-      // }else{
-      //   this.message = 'Email is not verified';
-      //   return false;
-      // }
+      this.router.navigate(['profile-selection']);
     }).catch(err =>{
       this.message = 'Login failed. Please check credentials';
     });

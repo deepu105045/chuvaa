@@ -29,17 +29,14 @@ export class AuthenticationService {
     });
   }
 
-  // Login in with email/password
   signIn(email, password) {
     return this.ngFireAuth.signInWithEmailAndPassword(email, password);
   }
 
-  // Register user with email/password
   registerUser(email, password) {
     return this.ngFireAuth.createUserWithEmailAndPassword(email, password);
   }
 
-  // Email verification when new user register
   async sendVerificationMail() {
     return (await this.ngFireAuth.currentUser).sendEmailVerification()
     .then(() => {
@@ -47,7 +44,6 @@ export class AuthenticationService {
     });
   }
 
-  // Recover password
   passwordRecover(passwordResetEmail) {
     return this.ngFireAuth.sendPasswordResetEmail(passwordResetEmail)
     .then(() => {
@@ -57,10 +53,9 @@ export class AuthenticationService {
     });
   }
 
-  // Returns true when user is looged in
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
-    return (user !== null && user.emailVerified !== false) ? true : false;
+    return (user !== null) ? true : false;
   }
 
   get userInfo() {
@@ -71,33 +66,25 @@ export class AuthenticationService {
     return this.userInfo.uid;
   }
 
-  // Returns true when user's email is verified
   get isEmailVerified(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
     return (user.emailVerified !== false) ? true : false;
   }
 
-  // Store user in localStorage
-  setUserData(user) {
+  setUserData(user: User) {
     const userRef: AngularFirestoreDocument<any> = this.afStore.doc(`users/${user.uid}`);
-    const userData: User = {
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
-      emailVerified: user.emailVerified
-    };
-    return userRef.set(userData, {
+    return userRef.set(user, {
       merge: true
     });
   }
 
-  // Sign-out
   signOut() {
     return this.ngFireAuth.signOut().then(() => {
       localStorage.removeItem('user');
       this.router.navigate(['login']);
     });
   }
+
+
 
 }

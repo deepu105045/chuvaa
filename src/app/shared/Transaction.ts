@@ -4,7 +4,7 @@ export interface Transaction{
   userId?: string;
   transactionDate: Date;
   category: string;
-  amount: string;
+  amount: number;
   type: string;
   createdAt: object;
 }

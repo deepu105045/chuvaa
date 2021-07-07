@@ -1,0 +1,51 @@
+
+
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Balance Sheet
+    </ion-title>
+  </ion-toolbar>
+  <ion-progress-bar class="progres-bar" color="danger" value="{{totalExpense/totalIncome}}"></ion-progress-bar>
+</ion-header>
+
+    <ion-list >
+      <span >
+        <ion-item-divider >
+          <ion-label>Balance</ion-label>
+          <ion-label slot ="end" >{{totalIncome - totalExpense | number:'':'en'}}</ion-label>
+        </ion-item-divider>
+
+      </span>
+      <span (click)="toggleIncomeDetails()">
+        <ion-item-divider >
+          <ion-label>Income</ion-label>
+          <ion-label slot ="end" style="color: green;">{{totalIncome | number:'':'en'}}</ion-label>
+        </ion-item-divider>
+        <span  *ngIf="showIncomeDetails" >
+          <ion-item *ngFor="let item of incomelist | keyvalue: keyDescOrder">
+            <ion-label>{{item.key}}</ion-label>
+            <ion-label>{{item.value | number:'':'en'}}</ion-label>
+          </ion-item>
+        </span>
+      </span>
+
+      <span (click)="toggleExpenseDetails()">
+        <ion-item-divider >
+          <ion-label>Expense</ion-label>
+          <ion-label slot ="end" style="color: red;">{{totalExpense | number:'':'en'}}</ion-label>
+        </ion-item-divider>
+        <span *ngIf="showExpenseDetails" class="expense-details" >
+          <div class="ed">
+            <ion-item *ngFor="let item of expenselist | keyvalue: keyDescOrder">
+              <ion-label>{{item.key}}</ion-label>
+              <ion-label>{{item.value | number:'':'en'}}</ion-label>
+            </ion-item>
+          </div>
+        </span>
+      </span>
+
+    </ion-list>
+
+

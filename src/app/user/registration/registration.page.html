@@ -8,23 +8,53 @@
 </ion-header>
 
 <ion-content>
-  <form>
-    <ion-item lines="full">
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="text" #email required></ion-input>
-    </ion-item>
+  <div class="box">
+    <div>
+      <form>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-item lines="full">
+                <ion-label position="stacked">Name</ion-label>
+                <ion-input placeholder="John Doe" type="text" #displayname required></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item lines="full">
+                <ion-label position="stacked">Email</ion-label>
+                <ion-input placeholder="deepu@gmail.com" type="text" #email required></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
 
-    <ion-item lines="full">
-      <ion-label position="floating">Password</ion-label>
-      <ion-input type="password" #password required></ion-input>
-    </ion-item>
+          <ion-row>
+            <ion-col>
+              <ion-item lines="full">
+                <ion-label position="stacked">Password</ion-label>
+                <ion-input placeholder ="Enter password" type="password" #password required></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
 
-    <ion-row>
-      <ion-col>
-      <ion-button type="submit" (click)="signUp(email, password)" expand="block">Register</ion-button>
-      </ion-col>
-    </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item lines="full">
+                <ion-label position="stacked">House/Family/Group Name</ion-label>
+                <ion-input value="My Home" placeholder = "My Sweet Home" type="text" #groupName required></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-button type="submit" (click)="signUp(email, password ,groupName,displayname)" expand="block">Register</ion-button>
+            </ion-col>
+          </ion-row>
+          <ion-label color ="danger"> {{message}}</ion-label>
+        </ion-grid>
+      </form>
+    </div>
+  </div>
 
-    <ion-label color ="danger"> {{message}}</ion-label>
-  </form>
 </ion-content>

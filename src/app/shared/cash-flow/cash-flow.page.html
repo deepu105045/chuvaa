@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="profile-selection/home/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Cash Flow</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-segment color="primary" value={{active}} (ionChange)="onFilterUpdate($event)">
+    <ion-segment-button value="expense">
+      <ion-label>Expense</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="income">
+      <ion-label>Income</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="transactions">
+      <ion-label>Transactions</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="dashboard">
+      <ion-label>Dashboard</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+
+  <div *ngIf="active == dashboard">
+    {{active}}
+  </div>
+<!--
+  <div *ngIf="!showForm">
+    <form [formGroup]='form'>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Date</ion-label>
+              <ion-datetime formControlName="transactionDate" displayFormat="MMM DD, YYYY"></ion-datetime>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Category</ion-label>
+              <ion-input formControlName="category" placeholder="Rent"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Amount</ion-label>
+              <ion-input type="number" formControlName="amount" placeholder=0.0></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-button expand=block (click)="onClear()">Clear</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand=block (click)="onSave()" [disabled]='!form.valid'>Save</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </div>
+
+  <div *ngIf="!showForm && active =='transactions'">
+    <app-transactions></app-transactions>
+  </div>
+
+  <div *ngIf="!showForm && active =='dashboard'">
+    <app-dashboard></app-dashboard>
+  </div> -->
+</ion-content>
