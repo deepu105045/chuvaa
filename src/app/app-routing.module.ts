@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { AuthGuardService } from './shared/service/auth-guard.service';
+
 
 const routes: Routes = [
    {
@@ -19,12 +19,24 @@ const routes: Routes = [
     path: 'profile-selection',
     loadChildren: () => import('./profile-selection/profile-selection.module').then( m => m.ProfileSelectionPageModule)
   },
-
+  {
+    path: 'kitchen',
+    loadChildren: () => import('./shared/kitchen/kitchen.module').then( m => m.KitchenPageModule)
+  },
+  {
+    path: 'coming-soon',
+    loadChildren: () => import('./shared/coming-soon/coming-soon.module').then( m => m.ComingSoonPageModule)
+  },
   {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
-  }
+  },
+  {
+    path: 'create-home',
+    loadChildren: () => import('./shared/family/create-home/create-home.module').then( m => m.CreateHomePageModule)
+  },
+
 
 
 ];

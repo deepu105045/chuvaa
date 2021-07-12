@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { PersonalPageRoutingModule } from './personal-routing.module';
+import { ComingSoonPageRoutingModule } from './coming-soon-routing.module';
 
-import { PersonalPage } from './personal.page';
+import { ComingSoonPage } from './coming-soon.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PersonalPageRoutingModule
+    ComingSoonPageRoutingModule
   ],
-  declarations: [PersonalPage]
+  declarations: [ComingSoonPage]
 })
-export class PersonalPageModule {}
+export class ComingSoonPageModule {}

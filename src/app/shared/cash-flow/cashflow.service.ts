@@ -4,6 +4,7 @@ import { Transaction } from '../Transaction';
 import firebase from 'firebase/app';
 import { DateService } from '../service/date.service';
 import { AuthenticationService } from '../service/authentication.service';
+import { constants } from '../Constants';
 
 @Injectable({
   providedIn: 'root'
@@ -20,13 +21,13 @@ export class CashflowService {
   constructor(private firestore: AngularFirestore, private dateService: DateService,
               private authService: AuthenticationService) { }
 
-  getExpenses(currentUser, currentYear, currentMonth){
-    const monthRef = this.getMonthCollection(currentUser, currentYear, currentMonth);
+  getExpenses(currentUser, currentYear, currentMonth, origin){
+    const monthRef = this.getMonthCollection(currentUser, currentYear, currentMonth, origin );
     return monthRef.collection(this.transaction,ref => ref.orderBy('transactionDate', 'desc'))
                    .snapshotChanges();
   }
-  getGroupedData(document,currentUser, currentYear, currentMonth){
-    const monthRef = this.getMonthCollection(currentUser, currentYear, currentMonth);
+  getGroupedData(document,currentUser, currentYear, currentMonth , origin){
+    const monthRef = this.getMonthCollection(currentUser, currentYear, currentMonth, origin );
     return monthRef.collection(this.groupedCollection).doc(document).get();
   }
 
@@ -36,8 +37,9 @@ export class CashflowService {
     const newDate = new Date(transactionDate);
     const currentYear = newDate.getFullYear();
     const currentMonth = this.dateService.formatMonth(newDate);
+    const origin = transaction.origin;
 
-    const monthRef = this.getMonthCollection(currentUser, currentYear, currentMonth);
+    const monthRef = this.getMonthCollection(currentUser, currentYear, currentMonth,origin);
     return monthRef.collection(this.transaction).add(transaction).then(res =>{
             console.log(res);
             this.addGroupedData(transaction);
@@ -46,19 +48,14 @@ export class CashflowService {
           });
   }
 
-  addUserRecordInCashFlow(){
-    const user = this.authService.userId;
-    return this.firestore.collection(this.collectionName).doc(user).set({});
-  }
-
-
   addGroupedData(transaction: Transaction){
     const currentUser = transaction.userId;
     const transactionDate = transaction.transactionDate;
     const newDate = new Date(transactionDate);
     const currentYear = newDate.getFullYear();
     const currentMonth = this.dateService.formatMonth(newDate);
-    const monthRef = this.getMonthCollection(currentUser, currentYear, currentMonth);
+    const origin = transaction.origin;
+    const monthRef = this.getMonthCollection(currentUser, currentYear, currentMonth,origin);
     return monthRef.collection(this.groupedCollection).doc(transaction.type).get().subscribe(e =>{
         const resp = e.data();
         if(typeof resp !== 'undefined'){
@@ -85,13 +82,12 @@ export class CashflowService {
     const currentUserId = this.authService.userId;
     const userRef = this.firestore.collection(this.usersCollection).doc(currentUserId);
     return userRef.valueChanges();
-
  }
 
-  private getMonthCollection(currentUser: string, currentYear: number, currentMonth: string) {
+  private getMonthCollection(currentUser: string, currentYear: number, currentMonth: string, origin: string) {
     return this.firestore
       .collection(this.collectionName)
-      .doc(currentUser)
+      .doc(currentUser+ '-' + origin)
       .collection(currentYear.toString())
       .doc(currentMonth.toString());
   }

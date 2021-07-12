@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Start a family</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form novalidate [formGroup]="form">
+    <ion-list>
+
+      <ion-item>
+          <ion-label position="stacked">Family Name </ion-label>
+          <ion-input formControlName="familyName" required type="text" ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Member email </ion-label>
+        <ion-input required type="text" >{{myEmail}}</ion-input>
+    </ion-item>
+
+      <div formArrayName="members">
+        <ion-item *ngFor="let member of memberControls let i =index">
+          <ion-label position="stacked">Memeber email  </ion-label>
+          <ion-input [formControlName]="i" required type="text" ></ion-input>
+       </ion-item>
+      </div>
+
+      <ion-item (click)="onAddMemeber()" lines=none>
+        <ion-fab-button slot ="end">
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+      </ion-item>
+
+    </ion-list>
+
+    <div class="ion-padding">
+      <ion-button (click)="createFamily()" expand="block" type="submit" class="ion-no-margin">
+        Save
+      </ion-button>
+    </div>
+  </form>
+</ion-content>
+
+

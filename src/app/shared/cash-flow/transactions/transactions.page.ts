@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { constants } from 'src/app/shared/Constants';
 import { AuthenticationService } from 'src/app/shared/service/authentication.service';
 import { DateService } from 'src/app/shared/service/date.service';
+import { ExpenseService } from '../../service/expense.service';
+import { IonLoaderService } from '../../service/ion-loader.service';
 import { CashflowService } from '../cashflow.service';
 
 @Component({
@@ -17,18 +19,20 @@ export class TransactionsPage implements OnInit {
   currentYear: string;
   currentUser: string;
 
-  constructor(private cashflowService: CashflowService,
+  constructor(private expenseService: ExpenseService,
               private authService: AuthenticationService,
-              private dateService: DateService) { }
+              private dateService: DateService,
+              private ionLoaderService: IonLoaderService) { }
 
   ngOnInit() {
+    this.ionLoaderService.simpleLoader();
     this.currentUser = this.authService.userId;
     this.allMonths = this.dateService.allMonths;
     this.allYears = this.dateService.allYears;
     this.currentMonth = this.dateService.currentMonth;
     this.currentYear = this.dateService.currentYear;
 
-    this.cashflowService.getExpenses(this.currentUser,this.currentYear,this.currentMonth)
+    this.expenseService.getExpenses(this.currentYear,this.currentMonth,'prayag')
         .subscribe(data => {
           this.transactionList = data.map(e => ({
               amount: e.payload.doc.data()[constants.amount],
@@ -36,6 +40,7 @@ export class TransactionsPage implements OnInit {
               type: e.payload.doc.data()[constants.type],
               transactionDate: e.payload.doc.data()[constants.transactionDate]
             }));
+            this.ionLoaderService.dismissLoader();
         });
   }
 

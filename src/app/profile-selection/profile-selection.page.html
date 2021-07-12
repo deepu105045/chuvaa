@@ -6,64 +6,174 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content>
-  <ion-grid>
-    <ion-row >
-      <ion-col >
-            <ion-card class="card1">
-              <ion-card-content>
-                <ion-button routerLink="/profile-selection/home" expand="block" fill="clear" class="expense" routeDirection="forward">
-                <div>
-                  <ion-icon class="home-icon" name="home"></ion-icon>
-                  <ion-text color="primary">
-                    <h2>My Home</h2>
-                  </ion-text>
-                </div>
-              </ion-button>
-              </ion-card-content>
-            </ion-card>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col >
-            <ion-card class="card1">
-              <ion-card-header>
-                <ion-label> </ion-label>
-              </ion-card-header>
-              <ion-card-content>
-                <ion-button routerLink="/profile-selection/personal" expand="block" fill="clear" class="expense" routeDirection="forward">
-                <div>
-                  <ion-icon class="home-icon" name="bicycle"></ion-icon>
-                  <ion-text color="primary">
-                    <h2>Personal</h2>
-                  </ion-text>
-                </div>
-              </ion-button>
-              </ion-card-content>
 
-            </ion-card>
+<ion-content>
+  <ion-card>
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="12">
+          <ion-button expand="block" fill="clear" >
+            <ion-label>
+              <h2> {{homeName}} </h2>
+            </ion-label>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size-xs="4">
+          <ion-button expand="block" fill="clear"  routeDirection="forward"
+            routerLink="/profile-selection/home/cash-flow">
+            <div>
+              <ion-icon name="rocket-sharp"></ion-icon>
+              <ion-label>
+                <p> Daily Expense </p>
+              </ion-label>
+            </div>
+          </ion-button>
+        </ion-col>
+        <ion-col size-xs="4">
+          <ion-button expand="block" fill="clear"  routeDirection="forward"
+            routerLink="/profile-selection/home/my-kitchen">
+            <div>
+              <ion-icon name="fast-food"></ion-icon>
+              <ion-label>
+                <p> My Kitchen </p>
+              </ion-label>
+            </div>
+          </ion-button>
+        </ion-col>
+
+        <ion-col size-xs="4">
+          <ion-button expand="block" fill="clear"  routeDirection="forward"
+            routerLink="/profile-selection/home/add-user-to-home/{{homeName}}">
+            <div>
+              <ion-icon name="add"></ion-icon>
+              <ion-label>
+                <p> Add New Memeber </p>
+              </ion-label>
+            </div>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+  </ion-card>
+
+  <ion-card>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">
+          <ion-button expand="block" fill="clear" >
+            <ion-label>
+              <h2> Personal</h2>
+            </ion-label>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-xs="5">
+          <ion-button expand="block" fill="clear"  routeDirection="forward"
+            routerLink="/coming-soon">
+            <div>
+              <ion-icon name="rocket-sharp"></ion-icon>
+              <ion-label>
+                <p> Personal expense</p>
+              </ion-label>
+            </div>
+          </ion-button>
+        </ion-col>
+        <ion-col size-xs="4">
+          <ion-button expand="block" fill="clear"  routeDirection="forward"
+            routerLink="/coming-soon">
+            <div>
+              <ion-icon name="logo-bitcoin"></ion-icon>
+              <ion-label>
+                <p> Investments </p>
+              </ion-label>
+            </div>
+          </ion-button>
+        </ion-col>
+
+        <ion-col>
+          <ion-button expand="block" fill="clear"  routeDirection="forward"
+            routerLink="/coming-soon">
+            <div>
+              <ion-icon name="trending-up-sharp"></ion-icon>
+              <ion-label>
+                <p> Diary </p>
+              </ion-label>
+            </div>
+          </ion-button>
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+
+
+  </ion-card>
+
+
+  <!-- <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card class="card1">
+          <ion-card-content>
+            <ion-button routerLink="/profile-selection/home" expand="block" fill="clear" class="expense"
+              routeDirection="forward">
+              <div>
+                <ion-icon class="home-icon" name="home"></ion-icon>
+                <ion-text color="primary">
+                  <h2>My Home</h2>
+                </ion-text>
+              </div>
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-            <ion-card class="card1">
-              <ion-card-header>
-                <ion-label> </ion-label>
-              </ion-card-header>
-              <ion-card-content>
-                <ion-button routerLink="/profile-selection/others" expand="block" fill="clear" class="expense" routeDirection="forward">
-                <div>
-                  <ion-icon class="home-icon"  name="wallet-sharp"></ion-icon>
-                  <ion-text color="primary">
-                    <h2>All Others</h2>
-                  </ion-text>
-                </div>
-              </ion-button>
-              </ion-card-content>
+        <ion-card class="card1">
+          <ion-card-header>
+            <ion-label> </ion-label>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-button routerLink="/profile-selection/personal" expand="block" fill="clear" class="expense"
+              routeDirection="forward">
+              <div>
+                <ion-icon class="home-icon" name="bicycle"></ion-icon>
+                <ion-text color="primary">
+                  <h2>Personal</h2>
+                </ion-text>
+              </div>
+            </ion-button>
+          </ion-card-content>
 
-            </ion-card>
+        </ion-card>
       </ion-col>
     </ion-row>
-  </ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card class="card1">
+          <ion-card-header>
+            <ion-label> </ion-label>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-button routerLink="/profile-selection/others" expand="block" fill="clear" class="expense"
+              routeDirection="forward">
+              <div>
+                <ion-icon class="home-icon" name="wallet-sharp"></ion-icon>
+                <ion-text color="primary">
+                  <h2>All Others</h2>
+                </ion-text>
+              </div>
+            </ion-button>
+          </ion-card-content>
+
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid> -->
 
 </ion-content>

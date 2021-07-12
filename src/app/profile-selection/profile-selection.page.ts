@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '../shared/service/user.service';
 
 @Component({
   selector: 'app-profile-selection',
@@ -7,10 +8,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./profile-selection.page.scss'],
 })
 export class ProfileSelectionPage implements OnInit {
+  homeName ='Home';
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              public userService: UserService) { }
 
   ngOnInit() {
+    this.userService.getUserData().subscribe(userData =>{
+      this.homeName = userData['homeName'];
+    });
+
   }
 
 

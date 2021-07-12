@@ -40,15 +40,7 @@
 
           <ion-row>
             <ion-col>
-              <ion-item lines="full">
-                <ion-label position="stacked">House/Family/Group Name</ion-label>
-                <ion-input value="My Home" placeholder = "My Sweet Home" type="text" #groupName required></ion-input>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <ion-button type="submit" (click)="signUp(email, password ,groupName,displayname)" expand="block">Register</ion-button>
+              <ion-button type="submit" (click)="signUp(email, password ,displayname)" expand="block">Register</ion-button>
             </ion-col>
           </ion-row>
           <ion-label color ="danger"> {{message}}</ion-label>

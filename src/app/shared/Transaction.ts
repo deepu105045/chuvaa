@@ -7,4 +7,6 @@ export interface Transaction{
   amount: number;
   type: string;
   createdAt: object;
+  origin?: string;
+  createdBY?: string;
 }

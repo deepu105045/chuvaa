@@ -7,12 +7,14 @@ import { IonicModule } from '@ionic/angular';
 import { ProfileSelectionPageRoutingModule } from './profile-selection-routing.module';
 
 import { ProfileSelectionPage } from './profile-selection.page';
+import { MaterialModule } from '../material.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    MaterialModule,
     ProfileSelectionPageRoutingModule
   ],
   declarations: [ProfileSelectionPage]

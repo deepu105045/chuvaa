@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { AuthenticationService } from 'src/app/shared/service/authentication.service';
+import { IonLoaderService } from 'src/app/shared/service/ion-loader.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginPage implements OnInit {
     public authService: AuthenticationService,
     public router: Router,
     public toastController: ToastController,
-    public loadingController: LoadingController
+    public ionLoaderService: IonLoaderService
   ) {}
 
 
@@ -33,25 +34,17 @@ export class LoginPage implements OnInit {
     });
   }
 
-  async presentLoading() {
-    const loading = await this.loadingController.create({
-      cssClass: 'my-custom-class',
-      message: 'Please wait...',
-      duration: 2000
-    });
-    await loading.present();
 
-    const { role, data } = await loading.onDidDismiss();
-    console.log('Loading dismissed!');
-  }
   logIn(){
-    this.presentLoading();
+    this.ionLoaderService.simpleLoader();
     const email = this.form.get('email').value;
     const password = this.form.get('password').value;
     this.authService.signIn(email,password)
     .then(res =>{
+      this.ionLoaderService.dismissLoader();
       this.router.navigate(['profile-selection']);
     }).catch(err =>{
+      this.ionLoaderService.dismissLoader();
       this.message = 'Login failed. Please check credentials';
     });
   }

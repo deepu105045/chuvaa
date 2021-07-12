@@ -6,6 +6,7 @@ import { DateService } from '../service/date.service';
 import { Transaction } from '../Transaction';
 import { CashflowService } from './cashflow.service';
 import { AuthenticationService } from '../service/authentication.service';
+import { ExpenseService } from '../service/expense.service';
 
 
 @Component({
@@ -22,16 +23,16 @@ export class CashFlowPage implements OnInit {
   monthYear: string;
 
   form: FormGroup;
-  constructor(private cashflowService: CashflowService,
+  constructor(
               public toastController: ToastController,
               private dateService: DateService,
-              private authService: AuthenticationService) {
+              private authService: AuthenticationService,
+              private expenseService: ExpenseService) {
     this.showForm = false;
     this.active = constants.dashboard;
     this.setFormStatus();
 
   }
-
 
   ngOnInit() {
     this.monthYear = this.dateService.getCurrentMonthYear();
@@ -68,10 +69,11 @@ export class CashFlowPage implements OnInit {
     const amount = this.form.get(constants.amount).value;
     const userId = user.uid;
     const type = this.active;
-    const createdAt = this.cashflowService.getFirebaseTimeStamp();
-    const transaction: Transaction = {transactionDate,category,amount, userId, type ,createdAt};
+    const createdAt = this.expenseService.getFirebaseTimeStamp();
+    const origin = constants.home;
+    const transaction: Transaction = {transactionDate,category,amount, userId, type ,createdAt, origin};
 
-    this.cashflowService.addExpense(transaction).then(res =>{
+    this.expenseService.addExpense(transaction,'prayag').then(res =>{
       this.form.reset({transactionDate});
       this.message = 'Saved successfully.';
       this.color = 'success';
@@ -101,8 +103,6 @@ export class CashFlowPage implements OnInit {
     }else{
       this.showForm = true;
     }
-    console.log(this.active);
-    console.log(this.showForm);
   }
 
 

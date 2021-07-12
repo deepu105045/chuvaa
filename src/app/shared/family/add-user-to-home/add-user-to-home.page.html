@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Add User</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card>
+    <ion-item>
+      <ion-label position="stacked" >Email</ion-label>
+      <ion-input type="text" #email required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">House Name</ion-label>
+      <ion-input type="text" #home>{{homeName}}</ion-input>
+    </ion-item>
+    <ion-button (click) ="addtoHouse(email)" expand ="block" color="primary">Add User</ion-button>
+  </ion-card>
+
+</ion-content>
