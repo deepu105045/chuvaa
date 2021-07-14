@@ -13,6 +13,7 @@ import { IonLoaderService } from 'src/app/shared/service/ion-loader.service';
 export class LoginPage implements OnInit {
   form: FormGroup;
   message: string;
+  userSaved =false;
   constructor(
     public authService: AuthenticationService,
     public router: Router,
@@ -41,8 +42,8 @@ export class LoginPage implements OnInit {
     const password = this.form.get('password').value;
     this.authService.signIn(email,password)
     .then(res =>{
-      this.ionLoaderService.dismissLoader();
       this.router.navigate(['profile-selection']);
+      this.ionLoaderService.dismissLoader();
     }).catch(err =>{
       this.ionLoaderService.dismissLoader();
       this.message = 'Login failed. Please check credentials';

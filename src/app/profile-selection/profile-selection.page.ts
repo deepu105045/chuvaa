@@ -10,26 +10,26 @@ import { UserService } from '../shared/service/user.service';
 })
 export class ProfileSelectionPage implements OnInit {
   homeName ='Home';
-  familyId:string;
+  familyId: string;
 
   constructor(private router: Router,
               public userService: UserService,
               private authService: AuthenticationService) { }
 
   ngOnInit() {
-    const user = this.authService.userInfo;
-    const currentUserEmail = user.email;
-    this.userService.getFamilies(currentUserEmail).subscribe(family =>{
-      family.map(e =>{
-        const familyName = e.payload.doc.data()['familyName'];
-        this.familyId = e.payload.doc.data()['familyId'];
-        this.homeName= familyName;
-        console.log(familyName);
-        console.log(this.familyId);
+    this.authService.user$.subscribe(user1 =>{
+      const user = this.authService.userInfo;
+      const currentUserEmail = user.email;
+      this.userService.getFamilies(currentUserEmail).subscribe(family =>{
+        family.map(e =>{
+          const familyName = e.payload.doc.data()['familyName'];
+          this.familyId = e.payload.doc.data()['familyId'];
+          this.homeName= familyName;
+
+          console.log(this.familyId)
+        });
       });
     });
-
-
   }
 
 

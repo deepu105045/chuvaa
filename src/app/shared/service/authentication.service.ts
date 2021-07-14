@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { User } from '../User';
+import { Observable } from 'rxjs';
+import firebase from 'firebase/app';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +12,7 @@ import { User } from '../User';
 
 export class AuthenticationService {
   userData: any;
+  user$: Observable<firebase.User>;
 
   constructor(
     public afStore: AngularFirestore,
@@ -17,6 +20,7 @@ export class AuthenticationService {
     public router: Router,
     public ngZone: NgZone
   ) {
+    this.user$ = this.ngFireAuth.authState;
     this.ngFireAuth.authState.subscribe(user => {
       if (user) {
         this.userData = user;
@@ -32,6 +36,8 @@ export class AuthenticationService {
   signIn(email, password) {
     return this.ngFireAuth.signInWithEmailAndPassword(email, password);
   }
+
+
 
   registerUser(email, password) {
     return this.ngFireAuth.createUserWithEmailAndPassword(email, password);
