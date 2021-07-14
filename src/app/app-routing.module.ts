@@ -31,11 +31,7 @@ const routes: Routes = [
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
-  },
-  {
-    path: 'create-home',
-    loadChildren: () => import('./shared/family/create-home/create-home.module').then( m => m.CreateHomePageModule)
-  },
+  }
 
 
 

@@ -7,7 +7,7 @@ import { Transaction } from '../Transaction';
 import { CashflowService } from './cashflow.service';
 import { AuthenticationService } from '../service/authentication.service';
 import { ExpenseService } from '../service/expense.service';
-
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-cash-flow',
@@ -21,13 +21,15 @@ export class CashFlowPage implements OnInit {
   color: string;
   showForm: boolean;
   monthYear: string;
+  familyId: string;
 
   form: FormGroup;
   constructor(
               public toastController: ToastController,
               private dateService: DateService,
               private authService: AuthenticationService,
-              private expenseService: ExpenseService) {
+              private expenseService: ExpenseService,
+              private activatedroute: ActivatedRoute) {
     this.showForm = false;
     this.active = constants.dashboard;
     this.setFormStatus();
@@ -35,6 +37,10 @@ export class CashFlowPage implements OnInit {
   }
 
   ngOnInit() {
+    this.activatedroute.paramMap.subscribe(params => {
+      this.familyId = params.get('id');
+  });
+
     this.monthYear = this.dateService.getCurrentMonthYear();
 
     this.form = new FormGroup({
@@ -73,7 +79,7 @@ export class CashFlowPage implements OnInit {
     const origin = constants.home;
     const transaction: Transaction = {transactionDate,category,amount, userId, type ,createdAt, origin};
 
-    this.expenseService.addExpense(transaction,'prayag').then(res =>{
+    this.expenseService.addExpense(transaction,this.familyId).then(res =>{
       this.form.reset({transactionDate});
       this.message = 'Saved successfully.';
       this.color = 'success';

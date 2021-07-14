@@ -31,21 +31,7 @@ export class RegistrationPage implements OnInit {
       if(user){
         localStorage.setItem('user', JSON.stringify(user));
         this.ionLoaderService.dismissLoader();
-        this.router.navigate(['profile-selection']);
-        // const persistedUser: User = {
-        //   email: email.value,
-        //   displayName: displayname.value,
-        //   uid:user.user.uid
-        // };
-        // this.authService.setUserData(persistedUser).then(userData=>{
-        //   this.userService.addUserToHome(groupName.value,email.value).then(res =>{
-        //     this.ionLoaderService.dismissLoader();
-        //     this.router.navigate(['profile-selection']);
-        //   }).catch(err =>{
-        //     this.ionLoaderService.dismissLoader();
-        //   });
-
-        // });
+        this.router.navigate(['login']);
       }
     }).catch( error =>{
       console.log('Error while saving');

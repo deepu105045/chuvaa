@@ -28,7 +28,12 @@ export class UserService {
   const data = {familyName, members,familyId};
   return this.firestore.collection(this.familyCollection).doc(familyId)
             .set(data);
+ }
 
+ getFamilies(email){
+   return this.firestore.collection(this.familyCollection, ref =>
+      ref.where('members','array-contains',email))
+      .snapshotChanges();
  }
 
 

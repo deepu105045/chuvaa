@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { constants } from 'src/app/shared/Constants';
 import { AuthenticationService } from 'src/app/shared/service/authentication.service';
 import { DateService } from 'src/app/shared/service/date.service';
@@ -18,13 +19,18 @@ export class TransactionsPage implements OnInit {
   currentMonth: string;
   currentYear: string;
   currentUser: string;
+  familyId: string;
 
   constructor(private expenseService: ExpenseService,
               private authService: AuthenticationService,
               private dateService: DateService,
-              private ionLoaderService: IonLoaderService) { }
+              private ionLoaderService: IonLoaderService,
+              private activatedroute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.activatedroute.paramMap.subscribe(params => {
+      this.familyId = params.get('id');
+  });
     this.ionLoaderService.simpleLoader();
     this.currentUser = this.authService.userId;
     this.allMonths = this.dateService.allMonths;
@@ -32,7 +38,7 @@ export class TransactionsPage implements OnInit {
     this.currentMonth = this.dateService.currentMonth;
     this.currentYear = this.dateService.currentYear;
 
-    this.expenseService.getExpenses(this.currentYear,this.currentMonth,'prayag')
+    this.expenseService.getExpenses(this.currentYear,this.currentMonth,this.familyId)
         .subscribe(data => {
           this.transactionList = data.map(e => ({
               amount: e.payload.doc.data()[constants.amount],

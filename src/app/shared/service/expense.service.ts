@@ -11,7 +11,7 @@ import { constants } from '../Constants';
 })
 export class ExpenseService {
   transaction = 'transactions';
-  collectionName = 'home';
+  collectionName = 'family-cashflow';
   groupedCollection ='grouped';
 
   constructor(private firestore: AngularFirestore, private dateService: DateService,
@@ -35,7 +35,7 @@ export class ExpenseService {
 
 
 
-    addGroupedData(transaction: Transaction,homeId:string){
+    addGroupedData(transaction: Transaction,homeId: string){
       const currentUser = transaction.userId;
       const transactionDate = transaction.transactionDate;
       const newDate = new Date(transactionDate);
