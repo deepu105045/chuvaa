@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AddUserToHomePageRoutingModule } from './add-user-to-home-routing.module';
+import { MyBagPageRoutingModule } from './my-bag-routing.module';
 
-import { AddUserToHomePage } from './add-user-to-home.page';
+import { MyBagPage } from './my-bag.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AddUserToHomePageRoutingModule
+    MyBagPageRoutingModule
   ],
-  declarations: [AddUserToHomePage]
+  declarations: [MyBagPage]
 })
-export class AddUserToHomePageModule {}
+export class MyBagPageModule {}

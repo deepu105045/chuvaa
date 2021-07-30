@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthenticationService } from '../../service/authentication.service';
 import { UserService } from '../../service/user.service';
 
@@ -15,6 +16,7 @@ export class CreateHomePage implements OnInit {
   form: FormGroup;
 
   constructor(private authService: AuthenticationService,
+              public router: Router,
               private userService: UserService,
               private fb: FormBuilder) { }
 
@@ -44,8 +46,9 @@ export class CreateHomePage implements OnInit {
     const familyName = this.form.get('familyName').value;
     const members = this.form.get('members').value;
     members.push(this.myEmail);
-    console.log(members);
-    this.userService.createFamily(familyName, members);
+    this.userService.createFamily(familyName, members).then(res =>{
+      this.router.navigate(['app-dashboard']);
+    })
 
   }
 

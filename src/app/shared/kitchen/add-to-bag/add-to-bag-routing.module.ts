@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AddUserToHomePage } from './add-user-to-home.page';
+import { AddToBagPage } from './add-to-bag.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: AddUserToHomePage
+    component: AddToBagPage
   }
 ];
 
@@ -14,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AddUserToHomePageRoutingModule {}
+export class AddToBagPageRoutingModule {}

@@ -1,6 +1,6 @@
 /* eslint-disable guard-for-in */
 import { KeyValue } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from 'src/app/shared/service/authentication.service';
 import { DateService } from 'src/app/shared/service/date.service';
@@ -13,7 +13,7 @@ import { CashflowService } from '../cashflow.service';
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
 })
-export class DashboardPage implements OnInit {
+export class DashboardPage implements OnInit  {
   expenselist ={};
   incomelist ={};
   totalIncome = 0;
@@ -29,13 +29,13 @@ export class DashboardPage implements OnInit {
               private ionLoaderService: IonLoaderService,
               private activatedroute: ActivatedRoute) { }
 
-
   ngOnInit() {
-    // eslint-disable-next-line max-len
     this.ionLoaderService.simpleLoader();
-    this.activatedroute.paramMap.subscribe(params => {
-      this.familyId = params.get('id');
-  });
+  //   this.activatedroute.paramMap.subscribe(params => {
+  //     this.familyId = params.get('id');
+  // });
+
+  this.familyId = this.activatedroute.snapshot.paramMap.get('id');
 
     this.keyDescOrder = (a: KeyValue<number,string>, b: KeyValue<number,string>): number =>
         a.value > b.value ? -1 : (b.value > a.value ? 1 : 0);
@@ -72,3 +72,5 @@ export class DashboardPage implements OnInit {
   }
 
 }
+
+

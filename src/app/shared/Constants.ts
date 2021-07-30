@@ -7,5 +7,7 @@ export const constants = {
   transactionDate: 'transactionDate',
   category:'category',
   dashboard:'dashboard',
-  home:'home'
+  home:'home',
+  familyId: 'familyId',
+  familyName: 'familyName'
 };

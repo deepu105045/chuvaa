@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>New Item</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form novalidate [formGroup]="form">
+    <ion-list>
+      <ion-item lines="full">
+        <ion-label>Category</ion-label>
+        <ion-select value = "Grocery" interface="popover" formControlName="category">
+          <ion-select-option *ngFor="let category of categories" [value]=category>{{category}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Item </ion-label>
+        <ion-input (ionInput)="filterList($event)" clearInput formControlName="item" placeholder="Milk Powder" type="text" required></ion-input>
+      </ion-item>
+
+      <ion-list *ngIf="show">
+          <ion-item *ngFor="let item of items">
+            <ion-label>{{item}}</ion-label>
+          </ion-item>
+      </ion-list>
+
+      <ion-item>
+        <ion-label position="stacked">Brands</ion-label>
+        <ion-textarea rows="3" formControlName="brands" placeholder="Everyday,Amul, Amulya"></ion-textarea>
+      </ion-item>
+    </ion-list>
+
+    <div class="ion-padding">
+      <ion-button (click)="addItem()" expand="block" type="submit" class="ion-no-margin">
+        Save
+      </ion-button>
+    </div>
+  </form>
+
+</ion-content>

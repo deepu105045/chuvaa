@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>My cart</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item-divider>
+    <ion-label>{{item.itemName}}</ion-label>
+  </ion-item-divider>
+  <ion-item>
+    <ion-label position="fixed">Qty</ion-label>
+    <ion-input [(ngModel)]="qtyInput" ></ion-input>
+
+  </ion-item>
+  <ion-item>
+    <ion-label position="fixed">Select Brand</ion-label>
+    <ion-list>
+      <ion-item lines=none *ngFor="let brand of item.brands; let idx = index">
+        <ion-button [color]="idx === brandIndex  ? 'success' : 'light'" (click)="selectBrand(brand,idx)"
+          expand="block">
+          {{brand}}
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  </ion-item>
+  <ion-item>
+    <ion-label position="fixed">Notes: </ion-label>
+    <ion-textarea #note></ion-textarea>
+  </ion-item>
+  <ion-item *ngIf="existingorderQty">
+    <ion-label color="danger">You have already added this item in bag</ion-label>
+  </ion-item>
+
+  <ion-button (click)="addtoBag(note)" expand="block">
+    Add to bag
+  </ion-button>
+
+</ion-content>

@@ -24,11 +24,11 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.form = new FormGroup({
-      email : new FormControl('unittest@gmail.com',{
+      email : new FormControl('deepu105045@gmail.com',{
         updateOn: 'blur',
         validators: [Validators.required]
       }),
-      password : new FormControl('test1234',{
+      password : new FormControl('Infy1234',{
         updateOn: 'blur',
         validators: [Validators.required , Validators.maxLength(180)]
       })
@@ -42,7 +42,7 @@ export class LoginPage implements OnInit {
     const password = this.form.get('password').value;
     this.authService.signIn(email,password)
     .then(res =>{
-      this.router.navigate(['profile-selection']);
+      this.router.navigate(['app-dashboard']);
       this.ionLoaderService.dismissLoader();
     }).catch(err =>{
       this.ionLoaderService.dismissLoader();

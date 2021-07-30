@@ -4,22 +4,19 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { KitchenPageRoutingModule } from './kitchen-routing.module';
+import { GroceryListPageRoutingModule } from './grocery-list-routing.module';
 
-import { KitchenPage } from './kitchen.page';
+import { GroceryListPage } from './grocery-list.page';
 import { MaterialModule } from 'src/app/material.module';
-
 
 @NgModule({
   imports: [
     CommonModule,
+    MaterialModule,
     FormsModule,
     IonicModule,
-    KitchenPageRoutingModule,
-    MaterialModule
-
+    GroceryListPageRoutingModule
   ],
-  exports:[KitchenPage],
-  declarations: [KitchenPage]
+  declarations: [GroceryListPage]
 })
-export class KitchenPageModule {}
+export class GroceryListPageModule {}

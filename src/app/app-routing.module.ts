@@ -16,25 +16,30 @@ const routes: Routes = [
     loadChildren: () => import('./user/login/login.module').then( m => m.LoginPageModule)
   },
   {
-    path: 'profile-selection',
-    loadChildren: () => import('./profile-selection/profile-selection.module').then( m => m.ProfileSelectionPageModule)
-  },
-  {
-    path: 'kitchen',
-    loadChildren: () => import('./shared/kitchen/kitchen.module').then( m => m.KitchenPageModule)
-  },
-  {
     path: 'coming-soon',
     loadChildren: () => import('./shared/coming-soon/coming-soon.module').then( m => m.ComingSoonPageModule)
+  },
+  {
+    path: 'app-dashboard',
+    loadChildren: () => import('./app-dashboard/app-dashboard.module').then( m => m.AppDashboardPageModule)
   },
   {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
+  },
+  {
+    path: 'add-item',
+    loadChildren: () => import('./shared/kitchen/add-item/add-item.module').then( m => m.AddItemPageModule)
+  },
+  {
+    path: 'add-to-bag',
+    loadChildren: () => import('./shared/kitchen/add-to-bag/add-to-bag.module').then( m => m.AddToBagPageModule)
+  },
+  {
+    path: 'my-bag',
+    loadChildren: () => import('./shared/kitchen/my-bag/my-bag.module').then( m => m.MyBagPageModule)
   }
-
-
-
 ];
 
 @NgModule({

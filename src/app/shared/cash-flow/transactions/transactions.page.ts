@@ -28,9 +28,11 @@ export class TransactionsPage implements OnInit {
               private activatedroute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.activatedroute.paramMap.subscribe(params => {
-      this.familyId = params.get('id');
-  });
+  //   this.activatedroute.paramMap.subscribe(params => {
+  //     this.familyId = params.get('id');
+  // });
+    this.familyId = this.activatedroute.snapshot.paramMap.get('id');
+
     this.ionLoaderService.simpleLoader();
     this.currentUser = this.authService.userId;
     this.allMonths = this.dateService.allMonths;

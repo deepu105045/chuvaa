@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>My cart</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar showcancelbutton="" (ionInput)="filterList($event)">
+    <ion-fab horizontal="end">
+      <ion-fab-button (click)="saveToBag()">Save</ion-fab-button>
+    </ion-fab>
+  </ion-searchbar>
+
+  <ion-item-group *ngFor="let category of objMap| keyvalue">
+    <ion-item-divider>
+      <ion-label>{{category.key}}</ion-label>
+    </ion-item-divider>
+
+    <ion-item *ngFor="let item of category.value">
+      <ion-label>{{item.itemName}}</ion-label>
+    </ion-item>
+  </ion-item-group>
+</ion-content>
