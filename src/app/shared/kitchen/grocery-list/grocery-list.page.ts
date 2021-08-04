@@ -1,6 +1,4 @@
-import { isNull } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
 import { KitchenService } from '../../service/kitchen.service';
 import { AddItemPage } from '../add-item/add-item.page';
@@ -14,6 +12,7 @@ export class GroceryListPage implements OnInit {
   groceryList =[];
   myShoppingBag =[];
   groceryListBackUp =[];
+  showInput = false;
 
 
   constructor(public popoverController: PopoverController,
@@ -80,6 +79,16 @@ export class GroceryListPage implements OnInit {
         return (item.itemName.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
       }
     });
+  }
+
+  editItem(item){
+    item.itemName = item.itemName;
+    // this.kitchenService.updateItem(item);
+  }
+
+  toggleInput(){
+    this.showInput = !this.showInput;
+    console.log(this.showInput)
   }
 
 }

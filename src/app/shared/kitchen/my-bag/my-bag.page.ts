@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable guard-for-in */
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, PopoverController } from '@ionic/angular';
 import { constants } from '../../Constants';
 import { AuthenticationService } from '../../service/authentication.service';
 import { KitchenService } from '../../service/kitchen.service';
 import { UserService } from '../../service/user.service';
+import { AddItemPage } from '../add-item/add-item.page';
 import { AddToBagPage } from '../add-to-bag/add-to-bag.page';
 
 @Component({
@@ -24,6 +24,7 @@ export class MyBagPage implements OnInit {
               private authService: AuthenticationService,
               private userService: UserService,
               public alertController: AlertController
+
               ) { }
 
   async ngOnInit() {
@@ -42,7 +43,7 @@ export class MyBagPage implements OnInit {
           }
           this.groceryListBackUp = this.groceryList;
           if(this.groceryList.length === 0){
-            await this.getDefaultGrocery()
+            await this.getDefaultGrocery();
           }
         });
       });
@@ -51,6 +52,8 @@ export class MyBagPage implements OnInit {
   }
 
 async groupByCategory() {
+  this.objMap ={};
+  console.log('Grouping grocery items by category');
   this.groceryList.forEach(element => {
     const makeKey = element.category;
      if(!this.objMap[makeKey]) {
@@ -59,6 +62,11 @@ async groupByCategory() {
 
     this.objMap[makeKey].push({
       itemName: element.itemName,
+      id:element.id,
+      brands: element.brands,
+      category: element.category,
+      selectedBrand: element.selectedBrand,
+      selectedQty: element.selectedQty
     });
    });
    console.log(this.objMap);
@@ -67,7 +75,8 @@ async groupByCategory() {
 
 
   getDefaultGrocery(){
-      this.kitchenService.getItems().subscribe((data) =>{
+    console.log('Get default grocery item list');
+      this.kitchenService.getItems().subscribe(async (data) =>{
       this.groceryList = data.map(e => ({
         id: e.payload.doc.id,
         itemName: e.payload.doc.data().itemName,
@@ -75,10 +84,12 @@ async groupByCategory() {
         category: e.payload.doc.data().category
       }));
       this.groceryListBackUp = this.groceryList;
+      await this.groupByCategory();
     });
   }
 
   async filterList(evt) {
+    console.log('Filter list by search item');
     this.groceryList = this.groceryListBackUp;
     const searchTerm = evt.srcElement.value;
 
@@ -102,6 +113,7 @@ async groupByCategory() {
   }
 
   async addToBag(item){
+    console.log('Add item to the bag');
     const popover = await this.popoverController.create({
       component: AddToBagPage,
       componentProps:{item},
@@ -121,13 +133,15 @@ async groupByCategory() {
   }
 
   addToList(key,value){
-
+    console.log('Update selected brand quantity')
     const objIndex = this.groceryList.findIndex((obj => obj.id === key));
     this.groceryList[objIndex].selectedBrand = value.brand;
     this.groceryList[objIndex].selectedQty = value.qty;
+    this.groupByCategory();
   }
 
   saveToBag(){
+    console.log('Save bag')
     const bag = {bag: this.groceryList};
     this.kitchenService.saveBag(this.familyId,bag,'latest');
   }
@@ -157,6 +171,24 @@ async groupByCategory() {
 
     await alert.present();
   }
+
+  async presentAddItemPopover() {
+    const popover = await this.popoverController.create({
+      component: AddItemPage,
+      translucent: true
+    });
+    await popover.present();
+    return popover.onDidDismiss().then(response =>{
+      if(response.data){
+        const key = response.data.data.id;
+        const value = response.data.data;
+        this.addToList(key,value);
+      }
+    }).catch(err =>{
+      console.log(err);
+    });
+  }
+
 
 
 }

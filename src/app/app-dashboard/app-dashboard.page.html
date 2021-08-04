@@ -1,9 +1,6 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Welcome {{name}}</ion-title>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="home"></ion-back-button>
-    </ion-buttons>
     <ion-buttons slot="end">
       <ion-button (click)="authService.signOut()">
         <ion-icon name="log-out-outline"></ion-icon>
@@ -13,7 +10,7 @@
 </ion-header>
 
 <ion-content>
-  <div *ngIf="!newUser">
+  <div >
   <ion-card *ngFor="let family of myData">
     <ion-grid >
       <ion-row >

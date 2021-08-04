@@ -13,7 +13,7 @@ export class AddItemPage implements OnInit {
   form: FormGroup;
   items = [];
   itemsBackUp =[];
-  show = false
+  show = false;
 
   constructor(private kitchenService: KitchenService) { }
 
@@ -64,7 +64,7 @@ export class AddItemPage implements OnInit {
 
     this.items = this.items.filter(item => {
       if (item && searchTerm) {
-        this.show= true
+        this.show= true;
         return (item.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
       }
     });

@@ -1,11 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
-
 import { MyBagPageRoutingModule } from './my-bag-routing.module';
-
 import { MyBagPage } from './my-bag.page';
 
 @NgModule({
@@ -14,6 +11,8 @@ import { MyBagPage } from './my-bag.page';
     FormsModule,
     IonicModule,
     MyBagPageRoutingModule
+  ],
+  providers:[
   ],
   declarations: [MyBagPage]
 })

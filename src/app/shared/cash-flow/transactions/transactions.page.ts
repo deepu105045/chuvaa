@@ -5,7 +5,6 @@ import { AuthenticationService } from 'src/app/shared/service/authentication.ser
 import { DateService } from 'src/app/shared/service/date.service';
 import { ExpenseService } from '../../service/expense.service';
 import { IonLoaderService } from '../../service/ion-loader.service';
-import { CashflowService } from '../cashflow.service';
 
 @Component({
   selector: 'app-transactions',

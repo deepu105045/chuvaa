@@ -4,7 +4,6 @@ import { ToastController } from '@ionic/angular';
 import { constants } from '../Constants';
 import { DateService } from '../service/date.service';
 import { Transaction } from '../Transaction';
-import { CashflowService } from './cashflow.service';
 import { AuthenticationService } from '../service/authentication.service';
 import { ExpenseService } from '../service/expense.service';
 import { ActivatedRoute } from '@angular/router';
@@ -31,7 +30,7 @@ export class CashFlowPage implements OnInit {
               private expenseService: ExpenseService,
               private activatedroute: ActivatedRoute) {
     this.showForm = false;
-    this.active = constants.dashboard;
+    this.active = constants.expense;
     this.setFormStatus();
 
   }

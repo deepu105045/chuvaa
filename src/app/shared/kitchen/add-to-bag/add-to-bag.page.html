@@ -8,17 +8,42 @@
   <ion-item-divider>
     <ion-label>{{item.itemName}}</ion-label>
   </ion-item-divider>
+
   <ion-item>
-    <ion-label position="fixed">Qty</ion-label>
-    <ion-input [(ngModel)]="qtyInput" ></ion-input>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="4">
+          <ion-input placeholder="Quantity" [(ngModel)]="qtyInput"></ion-input>
+        </ion-col>
+        <ion-col size="2">
+          <ion-chip [color]="unit =='Kg' ? 'success' : 'light'" (click)="setUnit('Kg')">
+            <ion-label>Kg</ion-label>
+          </ion-chip>
+        </ion-col>
+        <ion-col size="2">
+          <ion-chip [color]="unit =='gm' ? 'success' : 'light'" (click)="setUnit('gm')">
+            <ion-label >gm</ion-label>
+          </ion-chip>
+        </ion-col>
+        <ion-col  size="2">
+          <ion-chip [color]="unit =='ltr' ? 'success' : 'light'" (click)="setUnit('ltr')">
+            <ion-label >ltr</ion-label>
+          </ion-chip>
+        </ion-col>
+        <ion-col  size="2">
+          <ion-chip [color]="unit =='ml' ? 'success' : 'light'" (click)="setUnit('ml')">
+            <ion-label >ml</ion-label>
+          </ion-chip>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
   </ion-item>
   <ion-item>
     <ion-label position="fixed">Select Brand</ion-label>
     <ion-list>
       <ion-item lines=none *ngFor="let brand of item.brands; let idx = index">
-        <ion-button [color]="idx === brandIndex  ? 'success' : 'light'" (click)="selectBrand(brand,idx)"
-          expand="block">
+        <ion-button [color]="idx === brandIndex  ? 'success' : 'light'" (click)="selectBrand(brand,idx)" expand="block">
           {{brand}}
         </ion-button>
       </ion-item>

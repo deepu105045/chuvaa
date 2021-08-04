@@ -1,7 +1,8 @@
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, Input, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, PopoverController } from '@ionic/angular';
 import { Item } from '../../Item';
+import { AddItemPage } from '../add-item/add-item.page';
 
 @Component({
   selector: 'app-add-to-bag',
@@ -13,10 +14,12 @@ export class AddToBagPage implements OnInit {
   @Input() popover;
 
   brandIndex: number;
-  brand = 'any brand';
+  brand = 'Any brand';
   qty ='0 gm';
   existingorderQty: any;
   qtyInput='';
+  unit ='Kg';
+  unitColor= 'primary';
 
   constructor(public alertController: AlertController) { }
 
@@ -36,12 +39,15 @@ export class AddToBagPage implements OnInit {
     const obj = {
       id: this.item.id,
       itemName: this.item.itemName,
-      brand:  this.brand,
-      qty: this.qtyInput || this.qty,
+      brand:  this.brand ,
+      qty: this.qtyInput +this.unit || this.qty,
       note : note.value
     };
     this.popover.dismiss({ data: obj });
   }
 
+  setUnit(unit){
+    this.unit =unit;
+  }
 
 }

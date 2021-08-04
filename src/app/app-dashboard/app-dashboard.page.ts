@@ -24,8 +24,10 @@ export class AppDashboardPage implements OnInit {
     public authService: AuthenticationService) { }
 
   ngOnInit() {
+    this.ionViewWillEnter();
   }
   ionViewWillEnter() {
+    console.log('ionViewWillEnter');
     this.authService.user$.subscribe(user => {
       const currentUserEmail = user.email;
       this.name = user.email;

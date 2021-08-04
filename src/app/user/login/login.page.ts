@@ -24,11 +24,11 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.form = new FormGroup({
-      email : new FormControl('deepu105045@gmail.com',{
+      email : new FormControl('',{
         updateOn: 'blur',
         validators: [Validators.required]
       }),
-      password : new FormControl('Infy1234',{
+      password : new FormControl('',{
         updateOn: 'blur',
         validators: [Validators.required , Validators.maxLength(180)]
       })

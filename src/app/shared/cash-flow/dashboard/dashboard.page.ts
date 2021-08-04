@@ -6,7 +6,6 @@ import { AuthenticationService } from 'src/app/shared/service/authentication.ser
 import { DateService } from 'src/app/shared/service/date.service';
 import { ExpenseService } from '../../service/expense.service';
 import { IonLoaderService } from '../../service/ion-loader.service';
-import { CashflowService } from '../cashflow.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -31,11 +30,7 @@ export class DashboardPage implements OnInit  {
 
   ngOnInit() {
     this.ionLoaderService.simpleLoader();
-  //   this.activatedroute.paramMap.subscribe(params => {
-  //     this.familyId = params.get('id');
-  // });
-
-  this.familyId = this.activatedroute.snapshot.paramMap.get('id');
+    this.familyId = this.activatedroute.snapshot.paramMap.get('id');
 
     this.keyDescOrder = (a: KeyValue<number,string>, b: KeyValue<number,string>): number =>
         a.value > b.value ? -1 : (b.value > a.value ? 1 : 0);

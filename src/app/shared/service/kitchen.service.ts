@@ -19,6 +19,11 @@ export class KitchenService {
     return this.firestore.collection(this.groceryCollection).add(item);
   }
 
+  updateItem(item: any) {
+    return this.firestore.collection(this.groceryCollection).doc(item.id).set(item);
+  }
+
+
   getItems(): Observable<any>{
     return this.firestore.collection(this.groceryCollection).snapshotChanges();
   }

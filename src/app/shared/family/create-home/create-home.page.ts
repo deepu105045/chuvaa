@@ -47,8 +47,11 @@ export class CreateHomePage implements OnInit {
     const members = this.form.get('members').value;
     members.push(this.myEmail);
     this.userService.createFamily(familyName, members).then(res =>{
+      console.log(res);
       this.router.navigate(['app-dashboard']);
-    })
+    }).catch(err =>{
+      console.log(err)
+    });
 
   }
 
